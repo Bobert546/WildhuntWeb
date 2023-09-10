@@ -56,17 +56,30 @@
     <h2  style="text-align: center;">JOIN GAME</p>
         
     <p1>ENTER NAME</p1>
-    <input type="text" id="entName" name="entCode"><br><br>
+    <input type="text" id="entName" name="entName"><br><br>
 
     <p1>ENTER CODE</p1>
     <input type="text" id="entCode" name="entCode"><br><br>
 
     <button class="button" onclick="myFunction()">Enter</button>
+    <br>
+    <p1 id="codeStatus" style="color: #adadad;"></p2>
 </body>
 
 <script>
+    let hideCode = "1234";
     function myFunction(){
-        alert("Please Enter a valid code");
+        
+        let entName = document.querySelector("#entName");
+        let entCode = document.querySelector("#entCode");
+        let codeStatus = document.querySelector("#codeStatus");
+
+        if(entCode.value == hideCode){
+            codeStatus.innerHTML = "A Game Is Not Currently Active";
+        }
+        else{
+            codeStatus.innerHTML = "Invalid code";
+        }
     }
 </script>
 
