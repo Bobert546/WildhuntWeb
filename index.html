@@ -54,15 +54,20 @@
 
 <body>
     <h2  style="text-align: center;">JOIN GAME</p>
-    <br>
-
+        
     <p1>ENTER NAME</p1>
-    <input type="text" id="entCode" name="entCode"><br><br>
+    <input type="text" id="entName" name="entCode"><br><br>
 
     <p1>ENTER CODE</p1>
     <input type="text" id="entCode" name="entCode"><br><br>
-    
-    <button class="button">Enter</button>
+
+    <button class="button" onclick="myFunction()">Enter</button>
 </body>
+
+<script>
+    function myFunction(){
+        alert("Please Enter a valid code");
+    }
+</script>
 
 </html>
