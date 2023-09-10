@@ -54,13 +54,27 @@
         <img src="images/WHmap.png" style="width: 100%;height: auto;" alt="MAP">
         <h1>YOU ARE A HIDER</h1>
     </div>
+    <p id="coords">Coords</p>
 
 </body>
 
 
 
 <script>
+    let coords = document.querySelector("#coords");
 
+    navigator.geolocation.watchPosition(
+        function(position) {
+            // Handle the successful retrieval of the user's position
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            coords.innerHTML = "Latitude: " + latitude + ", Longitude: " + longitude;
+        },
+        function(error) {
+            // Handle errors here
+            alert("(please contact an organiser) Error getting location: " + error.message);
+        }
+    );
 </script>
 
 
