@@ -2,21 +2,21 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wildhunt Manager</title>
-<link rel="shortcut icon" type="image/fpg" href="images/Logo.jpg">
+    <title>Wildhunt Manager</title>
+    <link rel="shortcut icon" type="image/fpg" href="images/Logo.jpg">
 </head>
 
 <style>
     h1{
         font-size: 25px;
     }
-    p1{
+    p{
         font-size: 16px;
         text-align: center;
     }
     body{
         font-family: Arial, Helvetica, sans-serif;
-        margin: 0px;
+        margin: auto;
     }
     .topnav{
         background-color: #adadad;
@@ -45,6 +45,10 @@
     .button:active {
         background-color: #3e8e41;
     }
+    .centered{
+        margin: auto;
+        text-align: center;
+    }
 </style>
 
 <div class="topnav">
@@ -53,32 +57,60 @@
 </div>
 
 <body>
-    <h2  style="text-align: center;">JOIN GAME</p>
-        
-    <p1>ENTER NAME</p1>
-    <input type="text" id="entName" name="entName"><br><br>
+    <h2  style="text-align: center;" id="gameStatus" name="gameStatus">JOIN GAME</h2>
+    <b>  
 
-    <p1>ENTER CODE</p1>
-    <input type="text" id="entCode" name="entCode"><br><br>
+    <div class="centered">
+        <p>ENTER NAME</p>
+        <input type="text" id="entName" name="entName"><br><br>
 
-    <button class="button" onclick="myFunction()">Enter</button>
+        <p>ENTER CODE</p>
+        <input style="margin: 0 auto;" type="text" id="entCode" name="entCode"><br><br>
+        </b>  
+        <button class="button" onclick="myFunction()">Submit</button>
+    </div>
+
     <br>
-    <p1 id="codeStatus" style="color: #adadad;"></p2>
+    <p id="codeStatus" style="color: #adadad;"></p>
 </body>
 
 <script>
-    let hideCode = "1234";
+    let hideCode = "1";
+    let hunterCode = "2";
+    let orgCode = "3";
+    let gameActive = true;
+    let gameStatus = document.querySelector("#gameStatus");
+    
+    if(gameActive == true){
+        gameStatus.innerHTML = "JOIN GAME";
+    }
+    else{
+        gameStatus.innerHTML = "No Active Game Detected";
+    }
+    
     function myFunction(){
         
         let entName = document.querySelector("#entName");
         let entCode = document.querySelector("#entCode");
         let codeStatus = document.querySelector("#codeStatus");
 
-        if(entCode.value == hideCode){
-            codeStatus.innerHTML = "A Game Is Not Currently Active";
+        if(gameActive == true){
+
+            if(entCode.value == hideCode && true){
+                window.location.href = "hider.html";
+            }
+            else if(entCode.value == hunterCode && true){
+                window.location.href = "hunter.html";
+            }
+            else if(entCode.value == orgCode && true){
+                window.location.href = "organiser.html";
+            }
+            else{
+                codeStatus.innerHTML = "Invalid code";
+            }
         }
         else{
-            codeStatus.innerHTML = "Invalid code";
+            codeStatus.innerHTML = "There Is No Active Game";
         }
     }
 </script>
