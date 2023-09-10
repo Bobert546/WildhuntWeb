@@ -113,6 +113,12 @@
             codeStatus.innerHTML = "There Is No Active Game";
         }
     }
+    if ("geolocation" in navigator) {
+
+    }   
+    else {
+        alert("Unable to use GPS please Contact an organiser");
+    }
 </script>
 
 </html>
