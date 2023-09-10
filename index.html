@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
+
+
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildhunt Manager</title>
+    <title>Wildhunt Manager / Hider</title>
     <link rel="shortcut icon" type="image/fpg" href="images/Logo.jpg">
 </head>
+
+
 
 <style>
     h1{
@@ -31,94 +36,55 @@
         text-decoration: solid;
         float: right;
     }
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px;
-        margin: 10px;
-    }
-    .button:active {
-        background-color: #3e8e41;
-    }
     .centered{
         margin: auto;
         text-align: center;
     }
 </style>
 
-<div class="topnav">
-    <img src="images/Logo.jpg" style="width: 10%; height: 10%; padding: 14px 16px;float: left;" alt="WildHunt_logo">
-    <a><b>WildHunt Manager</b></a>
-</div>
+
 
 <body>
-    <h2  style="text-align: center;" id="gameStatus" name="gameStatus">JOIN GAME</h2>
-    <b>  
-
-    <div class="centered">
-        <p>ENTER NAME</p>
-        <input type="text" id="entName" name="entName"><br><br>
-
-        <p>ENTER CODE</p>
-        <input style="margin: 0 auto;" type="text" id="entCode" name="entCode"><br><br>
-        </b>  
-        <button class="button" onclick="myFunction()">Submit</button>
+    <div class="topnav">
+        <img src="images/Logo.jpg" style="width: 10%; height: 10%; padding: 14px 16px;float: left;" alt="WildHunt_logo">
+        <a><b>WildHunt Manager</b></a>
     </div>
 
-    <br>
-    <p id="codeStatus" style="color: #adadad;"></p>
+    <div class="centered">
+        <img src="images/WHmap.png" style="width: 100%;height: auto;" alt="MAP">
+        <h1>YOU ARE A HIDER</h1>
+    </div>
+    <p id="coords">Coords</p>
+
 </body>
 
+
+
 <script>
-    let hideCode = "1";
-    let hunterCode = "2";
-    let orgCode = "3";
-    let gameActive = true;
-    let gameStatus = document.querySelector("#gameStatus");
-    
-    if(gameActive == true){
-        gameStatus.innerHTML = "JOIN GAME";
-    }
-    else{
-        gameStatus.innerHTML = "No Active Game Detected";
-    }
-    
-    function myFunction(){
-        
-        let entName = document.querySelector("#entName");
-        let entCode = document.querySelector("#entCode");
-        let codeStatus = document.querySelector("#codeStatus");
+    let coords = document.querySelector("#coords");
 
-        if(gameActive == true){
-
-            if(entCode.value == hideCode && true){
-                window.location.href = "hider.html";
-            }
-            else if(entCode.value == hunterCode && true){
-                window.location.href = "hunter.html";
-            }
-            else if(entCode.value == orgCode && true){
-                window.location.href = "organiser.html";
-            }
-            else{
-                codeStatus.innerHTML = "Invalid code";
-            }
-        }
-        else{
-            codeStatus.innerHTML = "There Is No Active Game";
-        }
-    }
     if ("geolocation" in navigator) {
+    const options = {
+        enableHighAccuracy: true, // Improve accuracy if available
+        timeout: 10000, // Maximum time to wait for a location update (in milliseconds)
+        maximumAge: 0 // Disable caching of location data
+    };
 
-    }   
-    else {
-        alert("Unable to use GPS please Contact an organiser");
+    navigator.geolocation.watchPosition(
+        function(position) {
+            // Handle the successful retrieval of the user's position
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            coords.innerHTML = "Latitude: " + latitude + ", Longitude: " + longitude;
+        },
+        function(error) {
+            // Handle errors here
+            alert("(please contact an organiser) Error getting location: " + error.message);
+        }
+    );
     }
 </script>
+
+
 
 </html>
