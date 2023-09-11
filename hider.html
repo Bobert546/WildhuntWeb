@@ -70,8 +70,15 @@
 
 
 <script>
+    var map = L.map('map').setView([54.97319986951589, -2.112448590762894], 13);
+
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map);
+
     let coords = document.querySelector("#coords");
-    
+    const userMark = L.marker([0, 0]).addTo(map);
 
     if ("geolocation" in navigator) {
     const options = {
@@ -86,7 +93,7 @@
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             coords.innerHTML = "Latitude: " + latitude + ", Longitude: " + longitude;
-            L.marker([latitude, longitude]).addTo(map);
+            userMark.setLatLng([latitude,longitude]);
         },
         function(error) {
             // Handle errors here
@@ -94,13 +101,6 @@
         }
     );
     }
-
-    var map = L.map('map').setView([54.97319986951589, -2.112448590762894], 13);
-
-    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-    osm.addTo(map);
 
     var purpleZ = [[54.969675, -2.109731],[54.968897, -2.111617],[54.968677, -2.113696],[54.968689, -2.115112],[54.969256, -2.117440],[54.969167, -2.120173],[54.968706, -2.123549],[54.969278, -2.123462],[54.969949, -2.124503],[54.970734, -2.126697],[54.971630, -2.126332],[54.972849, -2.126352],[54.973071, -2.125150],[54.973270, -2.125272],[54.973580, -2.123768],[54.973921, -2.123990],[54.975576, -2.121426],[54.977378, -2.120515],[54.975645, -2.116753],[54.974383, -2.114750],[54.974002, -2.113856],[54.973808, -2.113566],[54.972649, -2.113125],[54.970858, -2.111843],[54.970239, -2.111180]];
     var Ppolygon = L.polygon(purpleZ, {color: 'purple'}).addTo(map);
