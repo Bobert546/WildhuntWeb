@@ -63,7 +63,22 @@
         </div>
         <h1>YOU ARE A HIDER</h1>
     </div>
-    <p id="coords">Coords</p>
+    <p id="coords">Latitude: ????? Longitude: ????</p>
+    <p id="population">Hiders: ????? Hunters: ????</p>
+
+    <br>
+
+    <div style="padding: 0px 30px;">
+        <label>I have been caught by </label>
+        <select id="huntersDrop"></select>
+        <button>Submit</button>
+        
+        <br>
+        <br>
+
+        <label>Hiders remaining</label>
+        <select id="hidersDrop"></select>
+    </div>
 
 </body>
 
@@ -72,6 +87,27 @@
 <script>
     var map = L.map('map').setView([54.97319986951589, -2.112448590762894], 13);
 
+    const hiders = ["Sammy","Leo","Haddi"];
+    const hunters = ["Morgan","Blake","Archie"];
+
+    hunters.forEach((hunter) => {
+        const option = document.createElement("option");
+        option.text = hunter;
+        huntersDrop.appendChild(option);
+    });
+
+    hiders.forEach((hider) => {
+        const option = document.createElement("option");
+        option.text = hider;
+        hidersDrop.appendChild(option);
+    });
+
+    let hidPop = hiders.length;
+    let huntPop = hunters.length;
+
+    population.innerHTML = "Hiders: "+hidPop+", Hunters: "+huntPop;
+
+    ////GEOLOCATION////
     var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
@@ -107,7 +143,7 @@
 
     var yellowZ = [[54.977378, -2.120515],[54.975645, -2.116753],[54.974383, -2.114750],[54.974002, -2.113856],[54.974394, -2.110755],[54.974717, -2.110019],[54.974781, -2.109404],[54.974552, -2.107882],[54.974521, -2.106558],[54.974129, -2.104702],[54.973131, -2.102823],[54.972656, -2.100931],[54.972595, -2.099369],[54.973457, -2.097501],[54.974482, -2.095808],[54.976061, -2.094521],[54.977933, -2.099365],[54.979808, -2.103592],[54.980913, -2.114172],[54.980410, -2.114585],[54.980761, -2.117226],[54.979582, -2.118183],[54.979282, -2.119063],[54.978067, -2.119522]];
     var Ypolygon = L.polygon(yellowZ, {color: 'yellow'}).addTo(map);
-    
+    ////GEOLOCATION////
 
 </script>
 
